@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <title>Recipe Share</title>
+</head>
+<body>
+    <h1 class="m-4" style="color: blue;">Recipe Share</h1>
+    <div class="row d-flex justify-content-around pt-4">
+        <div class="col-sm-5 border p-3">
+            <h2>Register</h2>
+            <form action="/register" method="post">
+                {% with messages = get_flashed_messages(category_filter=["register"]) %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p style="color: red;">{{ message }}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                <label for="first_name">First Name:</label>
+                <input type="text" name="first_name" id="first_name" class="form-control" value="{{ session['first_name'] }}">
+                <label for="last_name">Last Name:</label>
+                <input type="text" name="last_name" id="last_name" class="form-control" value="{{ session['last_name'] }}">
+                <label for="email">Email:</label>
+                <input type="text" name="email" id="email" class="form-control" value="{{ session['email'] }}">
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="password" class="form-control">
+                <label for="conf_password">Confirm Password:</label>
+                <input type="password" name="conf_password" id="conf_password" class="form-control">
+                <input type="submit" value="Create User" class="btn btn-primary mt-3">
+            </form>
+        </div>
+        <div class="col-sm-5 border p-3">
+            <h2>Log In</h2>
+            <form action="/login" method="post">
+                {% with messages = get_flashed_messages(category_filter=["login"]) %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p style="color: red;">{{ message }}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                <label for="email">Email:</label>
+                <input type="text" name="email" id="email" class="form-control" value="{{ session['login_email'] }}">
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="password" class="form-control">
+                <input type="submit" value="Log In" class="btn btn-primary mt-3">
+            </form>
+        </div>
+    </div>
+</body>
+</html>
